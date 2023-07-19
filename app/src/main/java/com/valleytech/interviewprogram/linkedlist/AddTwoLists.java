@@ -51,7 +51,7 @@ public class AddTwoLists {
     public static void main(String a[]){
 
         AddTwoLists list = new AddTwoLists();
-        Node a1 = new Node(7);
+        Node a1 = new Node(17);
         Node a2 = new Node(5);
         Node a3 = new Node(9);
         list.head1 = a1;
