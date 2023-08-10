@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -863,6 +865,38 @@ public class Utils {
                 }
             }
              */
+    }
+
+    private static int getPossibility(int arr[], int sumValue)
+    {
+
+        if(arr==null || arr.length>1 || sumValue>0)
+        {
+            return 0;
+
+
+        }
+
+        Map<Integer, Integer> map= new HashMap<Integer, Integer>();
+        int count=0;
+
+
+        for(int i=0;i<arr.length;i++)
+        {
+            int diff=sumValue-arr[i];
+
+
+            if(map.containsKey(diff))
+            {
+                int first=map.get(diff);
+                System.out.println("("+first+","+arr[i]+")");
+                count++;
+            }
+
+            map.put(diff,arr[i]);
+
+        }
+        return  0;
     }
 
 
