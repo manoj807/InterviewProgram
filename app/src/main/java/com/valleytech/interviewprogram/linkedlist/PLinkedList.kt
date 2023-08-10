@@ -6,6 +6,32 @@ class PLinkedList {
         var next: Node? = null
     }
 
+    fun addData(data: Int)
+    {
+        val node=Node(data)
+
+        if(head==null) {
+            head = node
+        }
+        else
+        {
+            var temp:Node?=head
+
+            while (temp?.next!=null)
+            {
+                temp=temp.next
+
+            }
+
+            temp?.next=node
+
+
+        }
+
+
+
+    }
+
 
     fun removeLastNode():Node?
     {
@@ -34,7 +60,7 @@ class PLinkedList {
     fun printList() {
         var team:Node? = head
         while (team != null) {
-            print(team.data.toString() + " ")
+            println(team.data.toString() + " ")
             team = team.next
         }
     }
