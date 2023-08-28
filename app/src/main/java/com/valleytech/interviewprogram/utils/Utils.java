@@ -2,14 +2,17 @@ package com.valleytech.interviewprogram.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class Utils {
@@ -23,6 +26,16 @@ public class Utils {
     {
         T t2=t;
         System.out.println(t2);
+
+    }
+
+    public  static  <T> void printArray(T[] t)
+    {
+
+        for(int i=0;i<t.length;i++)
+        {
+            System.out.println(i+"--"+t[i]);
+        }
 
     }
 
@@ -898,6 +911,258 @@ public class Utils {
         }
         return  0;
     }
+
+    public static List<Map.Entry<String,Integer>> getWordCount(String filePath)
+    {
+        Map<String, Integer> map=new HashMap<String,Integer>();
+        BufferedReader bufferedReader=null;
+        try {
+
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+
+             bufferedReader=new BufferedReader(new InputStreamReader(fileInputStream));
+
+            String line="";
+            while ((line=bufferedReader.readLine())!=null)
+            {
+
+                String words[]=line.split("\\s");
+
+                for(String word: words)
+                {
+                    String convertWord=word.toLowerCase();
+
+                    if(map.containsKey(convertWord))
+                    {
+
+                        map.put(convertWord,map.get(convertWord)+1);
+                    }else {
+
+                        map.put(convertWord,1);
+
+                    }
+
+
+                }
+
+
+            }
+
+
+        }catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                bufferedReader.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
+
+
+        return getSortByValue(map);
+
+    }
+
+    private static List<Map.Entry<String, Integer>>  getSortByValue(Map<String, Integer> map)
+    {
+
+        Set<Map.Entry<String,Integer>> set=map.entrySet();
+
+        List<Map.Entry<String,Integer>> list= new ArrayList<Map.Entry<String,Integer>>(set);
+
+        list.sort(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+
+        return list;
+
+
+    }
+
+
+    public static List<Map.Entry<Character,Integer>> findDuplicateCharsInString(String str) throws Exception
+    {
+        if(str==null && str.length()==1)
+        {
+            throw  new Exception("String is null or empty");
+        }
+
+        Map<Character,Integer> map=new HashMap<Character,Integer>();
+
+
+
+        char chs[]=str.toCharArray();
+
+        for(char ch:chs)
+        {
+
+            if(ch!=' ')
+            {
+
+                if(map.containsKey(ch))
+                {
+                    map.put(ch, map.get(ch)+1) ;
+                }else {
+
+                    map.put(ch, 1) ;
+                }
+
+            }
+
+
+
+        }
+
+        return  sortByValue(map);
+
+
+
+
+
+    }
+
+    private static List<Map.Entry<Character,Integer>> sortByValue(Map<Character, Integer> map)
+    {
+
+        if(map==null)
+        {
+            return null;
+        }
+
+        Set<Map.Entry<Character,Integer>> set=map.entrySet();
+         List<Map.Entry<Character,Integer>> list=new ArrayList<>(set);
+
+        list.sort(new Comparator<Map.Entry<Character,Integer>>(){
+
+            @Override
+            public int compare(Map.Entry<Character, Integer> o1, Map.Entry<Character, Integer> o2) {
+                return o1.getValue().compareTo(o2.getValue());
+            }
+        });
+
+        return  list;
+
+
+
+    }
+
+    public void printTwoMaxNumbers(int arr[]) throws Exception
+    {
+
+        if(arr==null || arr.length == 0)
+        {
+            throw new Exception("Array is empty");
+
+        }
+
+        int firstMax=0;
+        int secondMax=0;
+
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]>firstMax)
+            {
+                secondMax=firstMax;
+
+                firstMax=arr[i];
+            }else if(arr[i]>secondMax)
+            {
+                secondMax=arr[i];
+            }
+        }
+
+        System.out.println("first Max:"+firstMax);
+        System.out.println("secondMax:"+secondMax);
+
+    }
+
+
+    public static Integer[] fibonacciSeries(int count) throws Exception
+    {
+        if(count<=2)
+        {
+            throw new Exception("Empty Array");
+        }
+
+        Integer arr[]=new Integer[count];
+
+        arr[0]=0;
+        arr[1]=1;
+
+        for(int i=2;i<count;i++)
+        {
+            arr[i]=arr[i-1]+arr[i-2];
+
+
+        }
+
+        return arr;
+
+
+
+    }
+
+    public  boolean isPrimeNumber(int num)
+    {
+
+        if(num==1)
+        {
+            return false;
+        }
+
+
+        for(int i=2;i<=num/2;i++)
+        {
+            if(num%2==0)
+            {
+                return false;
+            }
+
+        }
+
+
+
+        return true;
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+   /* public void sortByValues(Map<String,String> map )
+    {
+
+        Set<Map.Entry<String,String>> set=map.entrySet();
+
+        List<Map.Entry<String,String>> list=new ArrayList<>(set);
+
+        list.sort((o1, o2) -> o1.getValue().compareTo(o2.getValue()));
+
+
+
+    }*/
 
 
 
