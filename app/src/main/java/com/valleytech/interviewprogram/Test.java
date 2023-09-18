@@ -1,9 +1,7 @@
 package com.valleytech.interviewprogram;
 
+import com.valleytech.interviewprogram.utils.KotlinUtils;
 import com.valleytech.interviewprogram.utils.Utils;
-
-import java.util.List;
-import java.util.Map;
 
 public class Test {
     public static void main(String a[]) throws Exception {
@@ -37,17 +35,13 @@ public class Test {
             e.printStackTrace();
         }*/
 
-        try{
-
-            Integer[] arr =Utils.fibonacciSeries(5);
-
-            Utils.printArray(arr);
+        int ar []={ 2,7,11,15};
 
 
-        }catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        int[] arr = KotlinUtils.INSTANCE.twoSum(ar,9);
+
+
+        Utils.printArray(arr);
 
 
 

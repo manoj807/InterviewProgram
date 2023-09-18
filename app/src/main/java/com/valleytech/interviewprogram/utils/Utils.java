@@ -29,7 +29,7 @@ public class Utils {
 
     }
 
-    public  static  <T> void printArray(T[] t)
+    public  static  void printArray(int[] t)
     {
 
         for(int i=0;i<t.length;i++)
@@ -1123,8 +1123,7 @@ public class Utils {
             return false;
         }
 
-
-        for(int i=2;i<=num/2;i++)
+       for(int i=2;i<=num/2;i++)
         {
             if(num%2==0)
             {
@@ -1133,12 +1132,7 @@ public class Utils {
 
         }
 
-
-
-        return true;
-
-
-
+       return true;
 
     }
 
