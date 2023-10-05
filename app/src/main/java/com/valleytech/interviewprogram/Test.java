@@ -3,7 +3,7 @@ package com.valleytech.interviewprogram;
 import com.valleytech.interviewprogram.utils.KotlinUtils;
 import com.valleytech.interviewprogram.utils.Utils;
 
-public class Test {
+public class Test  {
     public static void main(String a[]) throws Exception {
 
         System.out.println("hi");
