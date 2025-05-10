@@ -2,6 +2,7 @@ package com.valleytech.interviewprogram.utils
 
 import java.util.Arrays
 
+
 object KotlinUtils {
 
     fun twoSum(nums: IntArray, target: Int): IntArray {
@@ -288,6 +289,106 @@ object KotlinUtils {
 
 
     }
+
+    fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int {
+        var subRemaining = 0
+        var total = 0
+        var start = 0
+        for (i in gas.indices) {
+            val remaining = gas[i] - cost[i]
+            if (subRemaining >= 0) {
+                subRemaining = subRemaining + remaining
+            } else {
+                subRemaining = remaining
+                start = i
+            }
+            total = total + remaining
+        }
+        return if (total >= 0) {
+            start
+        } else {
+            -1
+        }
+    }
+
+
+    fun maxProduct(words: Array<String>?): Int {
+        if (words == null || words.size == 0) return 0
+        val length = words.size
+        val bitWiseWord = IntArray(length)
+        for (i in 0 until length) {
+            val word = words[i]
+            for (j in 0 until word.length) {
+                println("Pre:" + word + ":" + "j:" + j + " : " + bitWiseWord[i])
+                bitWiseWord[i] = bitWiseWord[i] or (1 shl word[j].code - 'a'.code)
+                println("Pre:" + word + ":" + "j:" + j + " : " + bitWiseWord[i])
+            }
+        }
+        var maxProduct = 0
+        for (i in 0 until length) {
+            for (j in 0 until length) {
+                if (bitWiseWord[i] and bitWiseWord[j] == 0) {
+                    val product = words[i].length * words[j].length
+                    if (product > maxProduct) {
+                        maxProduct = product
+                    }
+                }
+            }
+        }
+        return maxProduct
+    }
+
+
+    /*
+    Given an array of intervals where intervals[i] = [starti, endi], merge all overlapping intervals, and return an array of the non-overlapping intervals that cover all the intervals in the input.
+
+
+
+    Example 1:
+
+    Input: intervals = [[1,3],[2,6],[8,10],[15,18]]
+    Output: [[1,6],[8,10],[15,18]]
+    Explanation: Since intervals [1,3] and [2,6] overlap, merge them into [1,6].
+    Example 2:
+
+    Input: intervals = [[1,4],[4,5]]
+    Output: [[1,5]]
+    Explanation: Intervals [1,4] and [4,5] are considered overlapping.
+
+
+    Constraints:
+
+    1 <= intervals.length <= 104
+    intervals[i].length == 2
+    0 <= starti <= endi <= 104*/
+
+    fun mergeMultidimention(intervals: Array<IntArray>?): Array<IntArray>? {
+        val result: MutableList<IntArray> = ArrayList()
+        if (intervals == null || intervals.size == 0) {
+            return result.toTypedArray()
+        }
+        Arrays.sort(intervals, Comparator.comparingInt { a: IntArray ->
+            a[0]
+        })
+        var start = intervals[0][0]
+        var end = intervals[0][1]
+        for (i in intervals) {
+            if (i[0] <= end) {
+                end = Math.max(end, i[1])
+            } else {
+                result.add(intArrayOf(start, end))
+                start = i[0]
+                end = i[1]
+            }
+        }
+        result.add(intArrayOf(start, end))
+        return result.toTypedArray()
+    }
+
+
+
+
+
 
 
 }

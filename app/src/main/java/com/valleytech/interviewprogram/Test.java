@@ -1,5 +1,6 @@
 package com.valleytech.interviewprogram;
 
+import com.valleytech.interviewprogram.linkedlist.PartitionList;
 import com.valleytech.interviewprogram.utils.KotlinUtils;
 import com.valleytech.interviewprogram.utils.Utils;
 
@@ -35,13 +36,21 @@ public class Test  {
             e.printStackTrace();
         }*/
 
-        int ar []={ 2,7,11,15};
+      /*  int ar []={ 2,7,11,15};
 
 
         int[] arr = KotlinUtils.INSTANCE.twoSum(ar,9);
 
 
-        Utils.printArray(arr);
+        Utils.printArray(arr);*/
+
+        //new PartitionList().test();
+
+        String st[]={"abcw","baz","foo","bar","xtfn","abcdef"};
+
+       int data= KotlinUtils.INSTANCE.maxProduct(st);
+
+        System.out.println("max Product:"+data);
 
 
 
