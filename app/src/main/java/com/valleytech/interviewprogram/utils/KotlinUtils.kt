@@ -386,6 +386,139 @@ object KotlinUtils {
     }
 
 
+    fun findSecondLargestElement(nums:IntArray):Int
+    {
+        if(nums.isEmpty() || nums.size<2)
+        {
+            throw Exception("Input array is not right")
+        }
+
+        var firstLargest=Int.MIN_VALUE
+        var secondLargest=Int.MIN_VALUE
+
+
+        for(num in nums)
+        {
+
+            if(num>firstLargest)
+            {
+                secondLargest=firstLargest
+                firstLargest=num
+
+            }else if(num>secondLargest && num!= firstLargest)
+            {
+                secondLargest=num
+
+            }
+
+        }
+
+        //[5,5,5]
+        if(secondLargest== Int.MIN_VALUE && firstLargest!=Int.MIN_VALUE)
+        {
+            throw Exception("There is no second largest element in the array")
+        }
+        return  secondLargest;
+  }
+
+
+    fun separate0s1sSolution1(nums:IntArray): IntArray
+    {
+        var count=0;
+        for(num in nums)
+        {
+            if(num==0)
+            {
+                count++
+            }
+        }
+
+        for(i in 0 until count)
+         {
+             nums[i]=0;
+
+         }
+
+        for(i in count until nums.size)
+        {
+            nums[i]=1;
+        }
+
+        println(nums.joinToString(", "))
+
+        return  nums
+   }
+
+
+    fun separate0s1sSolution12(nums:IntArray): IntArray
+    {
+        var left=0;
+        var right= nums.size-1
+        while(left<right)
+        {
+            while(left<right && nums[left]==0)
+            {
+                left++
+            }
+
+            while(left<right && nums[right]==1)
+            {
+                right--
+            }
+
+            if(left<right)
+            {
+                //swap
+                val temp=nums[left]
+                nums[left]=nums[right]
+                nums[right]=temp
+            }
+            println(nums.joinToString(", "))
+        }
+
+
+
+
+        println(nums.joinToString(", "))
+
+        return  nums
+    }
+
+    fun separateOddsEvensSolution(arr :IntArray)
+    {
+        var left=0;
+        var right=arr.size-1
+
+        while(left<right)
+        {
+            while(left<right && arr[left]%2==0) //even
+            {
+                left++
+            }
+
+            while(left<right && arr[right]%2==1) //odd
+            {
+                right--
+            }
+
+            if(left<right) //swap
+            {
+                val temp=arr[left]
+                arr[left]=arr[right]
+                arr[right]=temp
+
+
+            }
+        }
+
+        println(arr.joinToString(","))
+
+    }
+
+
+
+
+
 
 
 

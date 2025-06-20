@@ -99,7 +99,7 @@ public class Utils {
         return decimal;
     }
 
-    public static String palldromNumber(String st)
+    public static boolean palldromNumber(String st)
     {
         char a []=st.toCharArray();
         String re="";
@@ -109,7 +109,24 @@ public class Utils {
 
         }
 
-        return re;
+        return re.equals(st);
+    }
+
+
+    public  static boolean isPalindrome(String str) {
+        if (str == null || str.length() < 2) {
+            return true;
+        }
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
     }
 
     public static long getSumOfNum(long num)
@@ -1140,7 +1157,25 @@ public class Utils {
 
 
 
+    public static boolean isAnagramUsingStringMethods(String word, String anagram) {
+        if (word.length() != anagram.length())
+            return false;
+        String lowerWord = word.toLowerCase();
+        String lowerAnagram = anagram.toLowerCase();
 
+        for (int i = 0; i < lowerWord.length(); i++) {
+            char c = lowerWord.charAt(i);
+            int index = lowerAnagram.indexOf(c);
+            // If index of any character is -1, then two strings are not anagrams
+            // If index of character is not equal to -1, then remove the chacter from the
+            // String
+            if (index != -1) {
+                lowerAnagram = lowerAnagram.substring(0, index) + lowerAnagram.substring(index + 1, lowerAnagram.length());
+            } else
+                return false;
+        }
+        return lowerAnagram.isEmpty();
+    }
 
 
 
@@ -1157,6 +1192,158 @@ public class Utils {
 
 
     }*/
+
+
+    public static boolean isAnagram(String str1, String str2) {
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+        int count[] = new int[256];
+        for (int i = 0; i < str1.length(); i++) {
+            count[str1.charAt(i)]++;
+            count[str2.charAt(i)]--;
+            System.out.println(count[str2.charAt(i)]+"--"+count[str1.charAt(i)]);
+        }
+        printArray(count);
+
+        for (int i = 0; i < 256; i++) {
+            if (count[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void printSubString(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = i + 1; j <= str.length(); j++) {
+
+
+                System.out.println("i::" + i + " j::" + j + " " + str.substring(i, j));
+            }
+
+        }
+    }
+
+  //  Java Program to find duplicate Characters in a String
+
+    public static void findDuplicateCharacters(String str) {
+        Map<Character, Integer> charCountMap = new HashMap<>();
+        for (char c : str.toCharArray()) {
+            charCountMap.put(c, charCountMap.getOrDefault(c, 0) + 1);
+        }
+        for (Map.Entry<Character, Integer> entry : charCountMap.entrySet()) {
+            if (entry.getValue() > 1) {
+                System.out.println("Character: " + entry.getKey() + ", Count: " + entry.getValue());
+            }
+        }
+    }
+
+    //without in build method
+    public static boolean findDuplicateCharactersWithoutInBuild(String str) {
+        char[] chars = str.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            for (int j = i + 1; j < chars.length; j++) {
+                if (chars[i] == chars[j]) {
+                    System.out.println("Duplicate character: " + chars[i]);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static void findDuplicateCharactersWithoutInBuild1(String str) {
+        if (str == null || str.isEmpty()) {
+            System.out.println("The string is empty or null.");
+            return;
+        }
+
+        System.out.println("List of duplicate characters in the string '" + str + "'");
+        int n = str.length();
+        boolean[] counted = new boolean[n]; // To avoid counting the same character multiple times
+
+        for (int i = 0; i < n; i++) {
+            if (counted[i]) {
+                continue; // Skip if this character has already been counted
+            }
+            int count = 1;
+            for (int j = i + 1; j < n; j++) {
+                if (str.charAt(i) == str.charAt(j)) {
+                    count++;
+                    counted[j] = true; // Mark this occurrence as counted
+                }
+            }
+            if (count > 1) {
+                System.out.println(str.charAt(i) + " : " + count);
+            }
+        }
+    }
+
+    public static String longestCommonPrefix(String strs[])
+    {
+        if(strs == null || strs.length == 0)
+        {
+            return "";
+        }
+
+        String prefix=strs[0];
+
+        for(int i=1;i<strs.length;i++)
+        {
+
+            while(strs[i].indexOf(prefix)!=0)
+            {
+                prefix=prefix.substring(0, prefix.length() - 1);
+
+                if(prefix.isEmpty())
+                    return  "";
+            }
+
+        }
+
+        return prefix;
+
+
+    }
+
+    public static void separateOddEvenInPlace(int arr[])
+    {
+        if(arr==null || arr.length == 0)
+        {
+            System.out.println("Array is empty");
+            return;
+        }
+
+        int left=0;
+        int  right=arr.length-1;
+
+        while(left<right)
+        {
+            while(left<right && arr[left]%2==0)
+            {
+                left++;
+            }
+
+            while(left<right && arr[right]%2!=0)
+            {
+                right--;
+            }
+
+            if(left<right)
+            {
+                int temp=arr[left];
+                arr[left]=arr[right];
+                arr[right]=temp;
+
+                left++;
+                right--;
+
+            }
+
+        }
+
+  }
 
 
 

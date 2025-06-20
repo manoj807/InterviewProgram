@@ -46,13 +46,36 @@ public class Test  {
 
         //new PartitionList().test();
 
-        String st[]={"abcw","baz","foo","bar","xtfn","abcdef"};
+       // String st[]={"abcw","baz","foo","bar","xtfn","abcdef"};
 
-       int data= KotlinUtils.INSTANCE.maxProduct(st);
+       //int data= KotlinUtils.INSTANCE.maxProduct(st);
 
-        System.out.println("max Product:"+data);
+       // System.out.println("max Product:"+data);
+
+       // System.out.println("isAnagram:::"+Utils.isAnagram("listen", "silent"));
+       // Utils.printSubString("hello");
+
+        //System.out.println("Is it palidrom: "+Utils.isPalindrome("maddam"));
+        //Utils.findDuplicateCharactersWithoutInBuild1("hello");
+        //Utils.findDuplicateCharactersWithoutInBuild1("helLoo");
+
+        //System.out.println("logngesPrefix: "+Utils.longestCommonPrefix(new String[]{"flower","flow","flight"}));
+
+        // System.out.println("Second largest element: "+KotlinUtils.INSTANCE.findSecondLargestElement(new int[]{5,5,5}));
 
 
+
+        /*int arr[]=new int[]{0,1,0,0,1};
+
+        KotlinUtils.INSTANCE.separate0s1sSolution12(arr);
+
+        Utils.printArray(arr);*/
+
+        int arr[]=new int[]{1,2,3,0,4,5,6,0,7,8,0,9,10};
+
+        KotlinUtils.INSTANCE.separateOddsEvensSolution(arr);
+
+        Utils.printArray(arr);
 
 
 
