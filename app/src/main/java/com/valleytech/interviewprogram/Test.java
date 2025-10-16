@@ -1,6 +1,9 @@
 package com.valleytech.interviewprogram;
 
 import com.valleytech.interviewprogram.linkedlist.PartitionList;
+import com.valleytech.interviewprogram.utils.A;
+import com.valleytech.interviewprogram.utils.B;
+import com.valleytech.interviewprogram.utils.KotlinTest;
 import com.valleytech.interviewprogram.utils.KotlinUtils;
 import com.valleytech.interviewprogram.utils.Utils;
 
@@ -59,7 +62,8 @@ public class Test  {
         //Utils.findDuplicateCharactersWithoutInBuild1("hello");
         //Utils.findDuplicateCharactersWithoutInBuild1("helLoo");
 
-        //System.out.println("logngesPrefix: "+Utils.longestCommonPrefix(new String[]{"flower","flow","flight"}));
+        System.out.println("logngesPrefix: "+Utils.longestCommonPrefix(new String[]{"flower","flow","flight"}));
+       // System.out.println("logngesPrefix: "+Utils.getLongestCommonPrefix(new String[]{"java2blog","javaworld","javabean","javatemp"}));
 
         // System.out.println("Second largest element: "+KotlinUtils.INSTANCE.findSecondLargestElement(new int[]{5,5,5}));
 
@@ -71,12 +75,21 @@ public class Test  {
 
         Utils.printArray(arr);*/
 
-        int arr[]=new int[]{1,2,3,0,4,5,6,0,7,8,0,9,10};
+        //int arr[]=new int[]{1,2,3,0,4,5,6,0,7,8,0,9,10};
 
-        KotlinUtils.INSTANCE.separateOddsEvensSolution(arr);
+        //KotlinUtils.INSTANCE.separateOddsEvensSolution(arr);
 
-        Utils.printArray(arr);
+       // Utils.printArray(arr);
+       // int nums[] ={5,12, 12, 3, 5, 4, 5, 6, 3, 12};
+       // int nums[] = new int[]{20, 40, 50, 40, 50, 20, 30, 30, 50, 20, 40, 40, 20};
+        //KotlinTest.INSTANCE.execute();
 
+        //System.out.println("Odd times element: " +Utils.getOddTimesElementXOR(nums));
+
+       // A a1= new A();
+       // a1.method();
+       // A b1= new B();
+       // b1.method();
 
 
     }
