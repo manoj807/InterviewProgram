@@ -1,6 +1,7 @@
 package com.valleytech.interviewprogram.utils
 
 import java.util.Arrays
+import kotlin.math.abs
 
 
 object KotlinUtils {
@@ -514,6 +515,396 @@ object KotlinUtils {
         println(arr.joinToString(","))
 
     }
+
+
+    fun  getOddTimesElement(arr : IntArray): Int {
+
+        var count=0;
+        for(num in arr) {
+            count=0;
+          for(num2 in arr)
+          {
+              if(num==num2)
+              {
+                  count++
+              }
+          }
+
+            if(count% 2 == 1) {
+                return num
+            }
+        }
+
+        return  -1
+
+    }
+
+    fun getOddTimesElementHash(arr:IntArray):Int
+    {
+        var map = mutableMapOf<Int,Int>();
+        for(num in arr)
+        {
+            map.put(num,map.getOrDefault(num,0)+1)
+        }
+
+        map.forEach{(key,value)->
+            if(value%2==1)
+            {
+                return key
+            }
+
+        }
+
+          return -1
+
+    }
+
+
+    //this methis is not return expected output
+    fun getOddTimesElementXOR(arr:IntArray):Int
+    {
+        var result=0
+
+        for(num in arr)
+        {
+            result = result xor num
+        }
+
+        return result
+
+    }
+
+
+    fun findPlatformsRequiredForStation(arrival: IntArray, departure: IntArray): Int {
+        if(arrival.isEmpty()||departure.isEmpty()||arrival.size != departure.size) {
+            throw Exception("Input arrays are not valid")
+        }
+
+        //val arr = intArrayOf(100, 140, 150, 200, 215, 400);
+        Arrays.sort(arrival)
+        Arrays.sort(departure)
+        var  palateform_needed=0;
+        var maxPlatform=0;
+        var i=0;
+        var j=0;
+
+        //Utils.printArray(arr);
+
+        while(i<arrival.size && j<departure.size)
+        {
+            if(arrival[i]<=departure[j]){
+                palateform_needed++
+                i++
+                if(maxPlatform< palateform_needed) {
+                    maxPlatform = palateform_needed
+                }
+            }else
+            {
+                palateform_needed--
+                j++
+            }
+        }
+
+           return maxPlatform
+    }
+
+
+
+    fun findPairWithMinSum(arr:IntArray):Pair<Int,Int>
+    {
+        if(arr.size<2)
+        {
+            throw Exception("Input array is not valid")
+        }
+
+         Arrays.sort(arr);
+         var minSum=Int.MAX_VALUE;
+
+          var l=0;
+          var r=arr.size-1;
+          var left=0;
+          var right=r;
+
+          while(l<r)
+          {
+              var sum= arr[l]+arr[r];
+              if(abs(sum) < abs(minSum)) {
+                  minSum=sum;
+                  left=l;
+                  right=r;
+              }
+
+              if(sum<0)
+              {
+                    l++
+              }else
+              {
+                  r--
+              }
+
+
+          }
+
+
+        return Pair(arr[left], arr[right])
+
+
+    }
+
+
+
+    fun findFirstNonRepeatingCharacter(str:String):Char
+    {
+        if(str.isNullOrEmpty())
+        {
+            throw Exception("Input string is not valid")
+        }
+
+        val freqs=IntArray(256) // ASCII size
+         str.forEach {
+             freqs[it.code]++
+         }
+
+
+        str.forEach {/*charr->*/
+            if(freqs[it.code]==1)
+            {
+                return it
+            }
+        }
+
+        return  '_'
+
+    }
+
+
+    fun removeDuplicateFromString(str:String):String
+    {
+        var freqs=BooleanArray(256);
+        var stringBuild=StringBuilder()
+        str.forEach {
+            if(!freqs[it.code])
+            {
+                freqs[it.code]= true
+                stringBuild.append(it)
+            }
+        }
+
+        return  stringBuild.toString()
+
+    }
+
+    fun countVowelsAndConsonants(str:String):Pair<Int, Int>
+    {
+        var vowels=0;
+        var consonants=0;
+
+        str.forEach {
+            if(it.code>='a'.code && it.code<='z'.code)
+            {
+                if(isVowel(it))
+                {
+                    vowels++
+                }else
+                {
+                    consonants++
+
+                }
+            }
+        }
+
+        return Pair(vowels, consonants)
+    }
+
+    fun isVowel(char:Char):Boolean
+    {
+        return char=='a' || char=='e' || char=='i' || char=='o' || char=='u';
+    }
+
+    fun findMostFrequentChar(strPar:String):Char
+    {
+        if(strPar.isNullOrEmpty())
+        {
+            throw Exception("Input string is not valid")
+        }
+
+        var str= strPar.lowercase() // To handle case insensitivity
+
+        val count=IntArray(256);
+        for(char in str.toCharArray())
+        {
+            count[char.code]++;
+        }
+
+        var maxCount=0;
+        var char='\u0000'
+
+        println("char:$char")
+
+        str.forEach {
+            if(count[it.code]>maxCount)
+            {
+                maxCount=count[it.code]
+                char=it
+            }
+        }
+
+        return char;
+
+    }
+
+    fun replaceSpaces(str:String, replacement:String = "%20"):String
+    {
+        if(str.isNullOrEmpty())
+        {
+            throw Exception("Input string is not valid")
+        }
+
+
+        val stringBuildr= StringBuilder();
+
+        for(char in str.toCharArray()) {
+            if(char== ' ')
+            {
+                stringBuildr.append(replacement)
+            }else
+            {
+                stringBuildr.append(char)
+            }
+
+        }
+
+        return stringBuildr.toString();
+
+    }
+
+    fun String.toLowerCase():String
+    {
+        val strignBuilkder=StringBuilder()
+
+        for(char in this.toCharArray())
+        {
+            if(char.code>='A'.code && char.code<='Z'.code)
+            {
+               strignBuilkder.append(char+32)
+            }else
+            {
+                strignBuilkder.append(char)
+            }
+        }
+
+        return strignBuilkder.toString()
+    }
+
+    fun String.toUpperCase():String
+    {
+        val strignBuilkder=StringBuilder()
+
+        for(char in this.toCharArray())
+        {
+            if(char.code>='a'.code && char.code<='z'.code)
+            {
+                strignBuilkder.append(char-32)
+            }else
+            {
+                strignBuilkder.append(char)
+            }
+        }
+
+        return strignBuilkder.toString()
+    }
+
+
+
+    //Sort an array of 0s, 1s and 2s
+
+    fun sort012(nums: IntArray) {
+        if (nums.isEmpty()) {
+            throw Exception("Input array is not valid")
+        }
+
+        var freq= IntArray(3)
+
+        nums.forEach {
+            if(it==0)
+            {
+                freq[0]++
+            } else if(it==1)
+            {
+                freq[1]++
+            } else if(it==2)
+            {
+                freq[2]++
+            } else
+            {
+                throw Exception("Input array is not valid")
+            }
+
+        }
+
+        for(i in 0 until nums.size) {
+            if (i < freq[0]) {
+                nums[i] = 0
+            } else if (i < freq[0] + freq[1]) {
+                nums[i] = 1
+            } else {
+                nums[i] = 2
+            }
+        }
+
+
+    }
+
+    fun sort012Second(nums:IntArray)
+    {
+        if(nums.isEmpty())
+        {
+            throw Exception("Input array is not valid")
+        }
+
+        var low=0;
+        var mid=0;
+        var high=nums.size-1
+
+        while(mid<=high)
+        {
+
+            when(nums[mid])
+            {
+                0->{
+                    val temp=nums[mid]
+                    nums[mid]=nums[low]
+                    nums[low]=temp
+                    low++
+                    mid++
+                }
+                1-> {
+                    mid++
+                }
+                2->{
+
+                    val temp=nums[mid]
+                    nums[mid]=nums[high]
+                    nums[high]=temp
+                    high--
+
+                }
+                else->
+                {
+                    throw Exception("Input array is not valid")
+                }
+
+
+
+            }
+
+
+        }
+
+        println(nums.joinToString(", "))
+
+    }
+
 
 
 

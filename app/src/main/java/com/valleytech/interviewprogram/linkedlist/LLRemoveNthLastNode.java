@@ -33,12 +33,27 @@ public class LLRemoveNthLastNode {
         return head;
     }
 
+    public static Node removeNthFromEnd(Node head, int n) {
+        Node dummy = new Node(0);
+        dummy.next = head;
+        Node first = dummy, second = dummy;
+        for(int i = 0; i <= n; i++) first = first.next;
+        while(first != null) {
+            first = first.next;
+            second = second.next;
+        }
+        second.next = second.next.next;
+        return head;
+    }
+
     static void printList(Node head) {
         while(head != null) {
             System.out.print(head.data+" ");
             head = head.next;
         }
     }
+
+
 
     public static void main(String[] a){
 
@@ -53,7 +68,7 @@ public class LLRemoveNthLastNode {
         n4.next = n5;
         printList(n1);
         System.out.println();
-        n1 = removeNode(n1, 3);
+        n1 = removeNthFromEnd(n1, 3);
         printList(n1);
     }
 }

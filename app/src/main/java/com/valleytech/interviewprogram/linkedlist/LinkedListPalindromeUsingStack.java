@@ -15,6 +15,7 @@ public class LinkedListPalindromeUsingStack {
         n2.next = n3;
         n3.next = n4;
         n4.next = n5;
+       // boolean result = isPalindrome2(n1);
         boolean result = isPalindrome(n1);
         System.out.println("Is it palindrome: "+result);
     }
@@ -27,7 +28,7 @@ public class LinkedListPalindromeUsingStack {
         }
     }
 
-    static boolean isPalindrome(Node head) {
+    static boolean isPalindrome2(Node head) {
 
         Node tempNode = head;
         Stack<Integer> stack = new Stack<Integer>();
@@ -44,4 +45,40 @@ public class LinkedListPalindromeUsingStack {
 
         return Boolean.TRUE;
     }
+
+    public static boolean isPalindrome(Node head) {
+        if(head == null) return true;
+        Node slow = head, fast = head;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        Node secondHalf = reverse(slow);
+     printList(secondHalf);
+        Node firstHalf = head;
+        while(secondHalf != null) {
+            if(firstHalf.data != secondHalf.data) return false;
+            firstHalf = firstHalf.next;
+            secondHalf = secondHalf.next;
+        }
+        return true;
+    }
+    private static Node reverse(Node head) {
+        Node prev = null, curr = head;
+        while (curr != null) {
+            Node next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+        return prev;
+    }
+
+    static void printList(Node head) {
+        while(head != null) {
+            System.out.print(head.data+" ");
+            head = head.next;
+        }
+    }
+
 }

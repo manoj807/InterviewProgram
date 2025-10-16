@@ -12,8 +12,13 @@ public class StackSorting {
             while(!tempStack.isEmpty() && tempStack.peek() > temp) {
                 input.push(tempStack.pop());
             }
+
+            System.out.println("temp: "+temp);
+
             tempStack.push(temp);
         }
+
+
 
         return tempStack;
     }
@@ -28,7 +33,14 @@ public class StackSorting {
         input.push(67);
         input.push(90);
         System.out.println("Input: "+input);
-        System.out.println("Output: "+StackSorting.sortStack(input));
+        //System.out.println("Output: "+StackSorting.sortStack(input));
+       Stack<Integer> sorted=StackSorting.sortStack(input);
+
+        for(int num:sorted)
+        {
+            System.out.println(num);
+        }
+
 
     }
 }

@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -318,6 +319,7 @@ public class Utils {
             }
 
         }
+
         if(str.length() == 1){
             return str;
         } else {
@@ -325,6 +327,9 @@ public class Utils {
             return str.charAt(str.length()-1)
                     +reverseString(str.substring(0,str.length()-1));
         }
+
+
+
     }
 
     public static void startPattern2(int r)
@@ -834,6 +839,65 @@ public class Utils {
     }
 
 
+    public static void butterfly_pattern(int n)
+    {
+        for (int i=1; i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("*");
+            }
+
+            for(int j=1; j<=n-i; j++)
+            {
+                System.out.print(" ");
+            }
+
+            for(int j=1;j<=n-i;j++)
+            {
+                System.out.print(" ");
+            }
+
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print("*");
+            }
+
+            System.out.println();
+
+        }
+
+        for(int i=1;i<=n-1;i++)
+        {
+            for(int j=1; j<=n-i;j++)
+            {
+                System.out.print("*");
+            }
+
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print(" ");
+            }
+
+            for(int j=1;j<=i;j++)
+            {
+                System.out.print(" ");
+            }
+
+            for(int j=1; j<=n-i;j++)
+            {
+                System.out.print("*");
+            }
+
+            System.out.println();
+
+
+        }
+
+
+    }
+
+
     public void readMaxLine()
     {
         BufferedReader br = null;
@@ -1028,7 +1092,6 @@ public class Utils {
 
             if(ch!=' ')
             {
-
                 if(map.containsKey(ch))
                 {
                     map.put(ch, map.get(ch)+1) ;
@@ -1043,6 +1106,12 @@ public class Utils {
 
         }
 
+       /* for(Map.Entry<Character,Integer>  enty: map.entrySet())
+        {
+            enty.getKey();
+            enty.getValue();
+        }
+*/
         return  sortByValue(map);
 
 
@@ -1291,9 +1360,11 @@ public class Utils {
 
         for(int i=1;i<strs.length;i++)
         {
-
+          System.out.println(prefix+"" +
+                  ""+strs[i].indexOf(prefix));
             while(strs[i].indexOf(prefix)!=0)
             {
+
                 prefix=prefix.substring(0, prefix.length() - 1);
 
                 if(prefix.isEmpty())
@@ -1306,6 +1377,35 @@ public class Utils {
 
 
     }
+
+
+    public static String getLongestCommonPrefix(String[] strArr) {
+        if(strArr.length==0) return "";
+        // Find minimum length String
+        String minStr=getMinString(strArr);
+
+        int minPrefixStrLength=minStr.length();
+        for(int i=0;i<strArr.length;i++){
+            int j;
+            for( j=0;j<minPrefixStrLength;j++){
+                if(minStr.charAt(j)!=strArr[i].charAt(j))
+                    break;
+            }
+            if(j<minPrefixStrLength)
+                minPrefixStrLength=j;
+        }
+        return minStr.substring(0,minPrefixStrLength);
+    }
+    public static String getMinString(String[] strArr)
+    {
+        String minStr=strArr[0];
+        for(int i=1;i<strArr.length;i++){
+            if(strArr[i].length()<minStr.length())
+                minStr=strArr[i];
+        }
+        return minStr;
+    }
+
 
     public static void separateOddEvenInPlace(int arr[])
     {
@@ -1344,6 +1444,427 @@ public class Utils {
         }
 
   }
+
+
+   public static int getOddTimesElementXOR(int ar[])
+    {
+
+        int result = 0;
+        for (int i = 0; i < ar.length; i++)
+        {
+            result = result ^ ar[i];
+        }
+        return result;
+    }
+
+  public  static char findFirstNonRepeatingCharacter(String str)
+  {
+
+      int freqs[]=new int[256]; // Assuming ASCII characters
+      for (char c : str.toCharArray()) {
+          freqs[c]++;
+      }
+
+      for(char c:str.toCharArray())
+      {
+          if(freqs[c]==1)
+          {
+              return c;
+          }
+      }
+
+   return '-'; // Return null character if no non-repeating character found
+
+
+  }
+
+
+  public static void printArray(List<Map.Entry<String, Integer>> list) throws Exception {
+       if(list.isEmpty() || list == null) {
+           throw new Exception("List is empty or null");
+        }
+        for (Map.Entry<String, Integer> entry : list) {
+            System.out.println(entry.getKey() + " -- " + entry.getValue());
+        }
+    }
+
+
+
+    public  static  void findPairToClosestToGiveX(int ar[], int num)
+    {
+       if(ar==null || ar.length==1)
+        {
+            throw new RuntimeException("Invalid array");
+        }
+
+        int diffRe=Integer.MAX_VALUE;
+        int l=0;
+        int r=ar.length-1;
+        int left=l;
+        int right=r;
+
+        while(l<r)
+        {
+            int diff=Math.abs(ar[l]+ar[r]-num);
+            if(diff<diffRe)
+            {
+                diffRe=diff;
+                left=l;
+                right=r;
+            }
+
+            if(ar[l]+ar[r]<num)
+            {
+                l++;
+            }else {
+               r--;
+            }
+
+        }
+
+        System.out.println("pair index::"+"ar["+left+"]"+"+ ar["+right+"]"+"::"+ar[left]+ar[right]);
+
+    }
+
+    public static void findPairsWithSum(int[] arr, int X) {
+        int n = arr.length;
+        System.out.println("Pairs with sum equal to " + X + " are:");
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
+                if (arr[i] + arr[j] == X) {
+                    System.out.println("(" + arr[i] + ", " + arr[j] + ")");
+                }
+            }
+        }
+    }
+
+
+    public static void findPairsEqualsToX(int arr[], int X) {
+
+        int n = arr.length;
+        if (n < 2)
+            return;
+        Arrays.sort(arr);
+        System.out.println("The pair whose sum is equal to 15 : ");
+        // left and right index variables
+        int l = 0, r = n - 1;
+
+        while (l < r) {
+            int currentSum = arr[l] + arr[r];
+            if (currentSum == X) {
+                System.out.println(arr[l] + " " + arr[r]);
+                l++;
+                r--;
+            } else if (arr[l] + arr[r] < X)
+                l++;
+            else
+                r--;
+        }
+    }
+
+
+    public  void findFirstAndSecondSmallest(int arr[])
+    {
+
+        int firstSmallest=Integer.MAX_VALUE;
+        int secondSmallest=Integer.MAX_VALUE;
+
+        for(int num : arr)
+        {
+            if(num<firstSmallest)
+            {
+                secondSmallest=firstSmallest;
+                firstSmallest=num;
+            }else if(num<secondSmallest && num!=firstSmallest) {
+
+                secondSmallest=num;
+            }
+        }
+
+        if(secondSmallest==Integer.MAX_VALUE && firstSmallest!=Integer.MAX_VALUE)
+        {
+            throw new RuntimeException("There is no second largest element in the array");
+        }
+
+    }
+
+
+    public void findFirstAndSecondLargest(List<Integer> list)
+    {
+
+        int firstLargest=Integer.MIN_VALUE;
+        int secondLargest=Integer.MIN_VALUE;
+
+        for(int item:list)
+        {
+            if(item>firstLargest)
+            {
+                secondLargest=firstLargest;
+                firstLargest=item;
+
+            }else if(item>secondLargest && item!=firstLargest){
+                secondLargest=item;
+            }
+        }
+
+        if(secondLargest==Integer.MIN_VALUE && firstLargest!=Integer.MIN_VALUE)
+        {
+            throw new RuntimeException("There is no second largest element in the array");
+        }
+
+
+    }
+
+    public  void findLargestAndSmallest(List<Integer> list)
+    {
+
+        int largest=Integer.MIN_VALUE;
+        int smallest=Integer.MAX_VALUE;
+        for(int item:list)
+        {
+            if(largest<item)
+            {
+                largest=item;
+            }
+
+            if(smallest>item)
+            {
+                smallest=item;
+            }
+        }
+
+    }
+
+
+    public static void reverseArray(int[] arr) {
+
+            int left = 0;
+            int right = arr.length - 1;
+
+            while (left < right) {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+
+                left++;
+                right--;
+            }
+
+
+        }
+
+
+
+    public static int findMajority(int[] arr) {
+
+        int candidate = 0;
+        int count = 0;
+
+        // Phase 1: Find candidate
+        for (int num : arr) {
+            if (count == 0) {
+                candidate = num;
+                count = 1;
+            } else if (num == candidate) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        // Phase 2: Verify candidate
+        count = 0;
+        for (int num : arr) {
+            if (num == candidate) {
+                count++;
+            }
+        }
+
+        return count > arr.length / 2 ? candidate : -1;
+    }
+
+    public int [] getFibonnecySeries(int n)
+    {
+        int ar[]=new int[n];
+
+        ar[0]=0;
+        ar[1]=1;
+
+        for(int i=2; i<n;i++)
+        {
+            ar[i]=ar[i-1]+ar[i-2];
+        }
+
+        printArray(ar);
+
+
+        return  ar;
+
+
+    }
+
+
+
+    public static int gcd(int a, int b) {
+
+        a = Math.abs(a);
+        b = Math.abs(b);
+
+        while (b != 0) {
+            int remainder = a % b;
+            a = b;
+            b = remainder;
+        }
+
+        return a;
+    }
+
+
+    public static int[] merge(int[] arr1, int[] arr2) {
+
+        int n1 = arr1.length;
+        int n2 = arr2.length;
+
+        int[] result = new int[n1 + n2];
+
+        int i = 0, j = 0, k = 0;
+
+        // Merge while both arrays have elements
+        while (i < n1 && j < n2) {
+            if (arr1[i] <= arr2[j]) {
+                result[k++] = arr1[i++];
+            } else {
+                result[k++] = arr2[j++];
+            }
+        }
+
+        // Copy remaining elements of arr1
+        while (i < n1) {
+            result[k++] = arr1[i++];
+        }
+
+        // Copy remaining elements of arr2
+        while (j < n2) {
+            result[k++] = arr2[j++];
+        }
+
+        return result;
+    }
+
+
+    public static int findFirst(int[] arr, int target) {
+        int left = 0, right = arr.length - 1;
+        int result = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) {
+                result = mid;
+                right = mid - 1; // move left
+
+
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return result;
+    }
+
+
+
+    public static int findLast(int[] arr, int target) {
+        int left = 0, right = arr.length - 1;
+        int result = -1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == target) {
+                result = mid;
+                left = mid + 1; // move right
+
+
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return result;
+    }
+
+    public  static int findLongestUniqueCharStringLength(String str)
+    {
+        int freqs[]=new int[256];
+
+        for(char ch: str.toCharArray())
+        {
+            freqs[ch]+=1;
+
+        }
+
+        int maxLength=0;
+
+        for(int freq:freqs)
+        {
+            if(freq>0)
+            {
+                maxLength+=1;
+            }
+
+        }
+
+        return  maxLength;
+
+    }
+
+
+
+    public static int[] removeDuplicates(int[] arr) {
+
+        int n = arr.length;
+        int index = 0;
+
+        for (int i = 0; i < n; i++) {
+
+            boolean isDuplicate = false;
+
+            for (int j = 0; j < index; j++) {
+                System.out.println("j::"+j+":::i:::"+i);
+                if (arr[i] == arr[j]) {
+                    isDuplicate = true;
+                    break;
+                }
+            }
+
+            if (!isDuplicate) {
+                arr[index++] = arr[i];
+            }
+        }
+
+        int newArr[]=new int[index];
+
+        for(int i=0;i<index;i++)
+        {
+            newArr[i]=arr[i];
+        }
+
+
+        return newArr;
+    }
+
+
+    public static boolean isPowerOfTwo(int n) {
+
+        if (n <= 0)
+            return false;
+
+        return (n & (n - 1)) == 0;
+    }
 
 
 
