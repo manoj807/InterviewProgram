@@ -34,7 +34,7 @@ object KotlinTest {
         //var arr= intArrayOf(1,0,2,1,0,1,2,2,0,0,1)//pass
         //var arr= intArrayOf(1,0,1,0)//pass
         var arr= intArrayOf(0)//pass
-        arr.size    
+        arr.size
        // var arr= intArrayOf();
         KotlinUtils.sort012Second(arr)
         println("narr3::${arr.joinToString(", ")}")
@@ -49,9 +49,4 @@ object KotlinTest {
 
 
     }
-
-
-
-
-
 }
